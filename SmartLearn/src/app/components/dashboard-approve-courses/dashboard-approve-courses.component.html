@@ -1,0 +1,39 @@
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">📖 Pending Courses</h2>
+  
+    <!-- Loading -->
+    <div *ngIf="loading" class="text-center">
+      <div class="spinner-border text-primary"></div>
+    </div>
+  
+    <!-- No courses -->
+    <div *ngIf="!loading && courses.length === 0" class="alert alert-info text-center">
+      لا يوجد كورسات في انتظار الموافقة ✅
+    </div>
+  
+    <!-- Courses table -->
+    <table *ngIf="!loading && courses.length > 0" class="table table-hover shadow rounded">
+      <thead class="table-primary">
+        <tr>
+          <th>📖 Title</th>
+          <th>👤 Instructor</th>
+          <th>🏷 Category</th>
+          <th>⚡ Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of courses">
+          <td>{{ course.title }}</td>
+          <td>{{ course.instructorID?.name || 'Unknown' }}</td>
+          <td>{{ course.categoryID || 'بدون تصنيف' }}</td>
+          <td>
+            <button class="btn btn-outline-primary btn-sm ms-2"
+                    (click)="viewCourse(course._id)">
+              عرض التفاصيل ➝
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

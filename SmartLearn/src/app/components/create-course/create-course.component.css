@@ -1,0 +1,31 @@
+/* create-course.component.css */
+
+/* Overlay */
+.modal.show {
+    display: block;
+    opacity: 0;
+    animation: fadeInOverlay 0.3s forwards;
+    background: rgba(0,0,0,0.5);
+  }
+  
+  /* Modal dialog animation */
+  .modal-dialog {
+    transform: translateY(-50px);
+    opacity: 0;
+    animation: slideInModal 0.3s forwards;
+  }
+  
+  /* Keyframes */
+  @keyframes fadeInOverlay {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInModal {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  

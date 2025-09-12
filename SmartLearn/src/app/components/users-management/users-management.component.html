@@ -1,0 +1,73 @@
+<div class="container mt-5">
+  <!-- زر الرجوع -->
+  <button class="btn btn-secondary mb-4" (click)="goBack()">
+    ← Go Back
+  </button>
+
+  <h2 class="mb-4 text-center">👥 Users Management</h2>
+
+  <!-- لودينج -->
+  <div *ngIf="loading && !searchQuery" class="text-center mb-4">
+    <div class="spinner-border text-primary"></div>
+  </div>
+
+  <!-- مفيش يوزرز -->
+  <div *ngIf="!loading && users.length === 0 && !searchQuery" class="alert alert-info text-center">
+    لا يوجد مستخدمين ✅
+  </div>
+
+  <!-- input search -->
+  <div class="position-relative mb-4">
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="🔍 Search users..." 
+      (input)="onSearch($event)"
+    >
+
+    <!-- قائمة نتائج البحث -->
+    <ul *ngIf="searchResults.length > 0" class="list-group shadow mt-2">
+      <li 
+        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" 
+        *ngFor="let user of searchResults" 
+        (click)="goToDetails(user._id)"
+        style="cursor: pointer;"
+      >
+        <div>
+          👤 <strong>{{ user.name }}</strong> <br>
+          📧 {{ user.email }}
+        </div>
+        <span class="badge bg-primary">View</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- الجدول العادي (لو السيرش فاضي) -->
+  <table *ngIf="!loading && users.length > 0 && searchQuery.length === 0" class="table table-hover shadow rounded">
+    <thead class="table-primary">
+      <tr>
+        <th>👤 Name</th>
+        <th>📧 Email</th>
+        <th>🎭 Role</th>
+        <th colspan="2" class="text-center">⚡ Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td class="text-center">
+          <button class="btn btn-primary btn-sm" (click)="goToDetails(user._id)">
+            Details
+          </button>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-danger btn-sm" (click)="deleteUser(user._id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

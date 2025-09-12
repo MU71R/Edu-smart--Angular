@@ -1,0 +1,119 @@
+<div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-primary"></div>
+    <p>Loading...</p>
+</div>
+<div class="container my-5" *ngIf="!loading && package">
+    <!-- Header with Background Image -->
+    <div class="row mb-4">
+      <div class="col-12 package-header position-relative text-white rounded"
+           [ngStyle]="{'background-image': 'url(' + package.coverImageURL + ')'}">
+        <div class="overlay"></div>
+        <div class="header-content p-4">
+          <h2>{{ package.title }}</h2>
+          <p>{{ package.description }}</p>
+          <div class="d-flex flex-wrap gap-3 mb-2">
+            <span><i class="fa fa-book"></i> {{ package.package.length }} Courses</span>
+            <span><i class="fa fa-clock"></i> {{ package.totalHours }} hrs</span>
+            <span><i class="fa fa-user"></i> {{ package.students?.length }} Students</span>
+            <span><i class="fa fa-star text-warning"></i> {{ package.rating || 0 }} rating</span>
+            <span>{{ package.level }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+        <!-- Left Column -->
+        <div class="col-lg-8">
+          <!-- Tabs -->
+          <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab==='overview'" (click)="setActiveTab('overview')">Overview</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab==='curriculum'" (click)="setActiveTab('curriculum')">Curriculum</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab==='skills'" (click)="setActiveTab('skills')">Skills</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab==='career'" (click)="setActiveTab('career')">Career</a>
+            </li>
+          </ul>
+    
+          <!-- Dynamic Tab Content -->
+          <div *ngIf="activeTab === 'overview'">
+            <h5>About This Learning Path</h5>
+            <p>{{ package.description }}</p>
+            <h6>Prerequisites</h6>
+            <ul><li *ngFor="let skill of package.keySkills">{{ skill }}</li></ul>
+            <h6>Certificates</h6>
+            <ul><li *ngFor="let cert of package.careerPaths">{{ cert }}</li></ul>
+          </div>
+    
+          <div *ngIf="activeTab === 'curriculum'">
+            <h5>Course Curriculum</h5>
+            <p>{{ package.package.length }} courses • {{ package.totalHours }} hours total time</p>
+          
+            <div *ngFor="let course of package.package; let i = index" class="curriculum-course mb-3 p-3 border rounded">
+              <div class="d-flex justify-content-between align-items-start flex-wrap flex-lg-nowrap">
+                <!-- Left Side: Course Info -->
+                <div class="flex-grow-1 me-3">
+                  <h6>{{ i + 1 }}. {{ course.title }}</h6>
+                  <p class="text-muted mb-1">{{ course.description }}</p>
+                  <small class="text-muted">{{ course.estimatedDuration }} • {{ course.lessons }} lessons • {{ course.level }}</small>
+                </div>
+          
+                <!-- Right Side: Rating + Buttons -->
+                <div class="text-lg-end mt-2 mt-lg-0">
+                  <p class="mb-1">
+                    <i class="fa fa-star text-warning"></i>
+                    <strong>{{ course.rating || 0 }}</strong> 
+                  </p>
+                  <div class="d-flex justify-content-end gap-2">
+                    <button class="btn btn-outline-primary btn-sm" *ngIf="course.preview">Preview</button>
+                    <button class="btn btn-primary btn-sm" (click)="startCourse(course._id)">
+                      {{ course.completed ? 'Review' : 'Start' }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="activeTab === 'skills'">
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge bg-secondary" *ngFor="let skill of package.keySkills">{{ skill }}</span>
+            </div>
+          </div>
+    
+          <div *ngIf="activeTab === 'career'">
+            <ul>
+              <li *ngFor="let career of package.careerPaths">{{ career }}</li>
+            </ul>
+          </div>
+    
+        </div>    
+      <!-- Right Column (Sidebar) -->
+      <div class="col-lg-4">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h6>Get Started</h6>
+            <p>Total Duration: {{ package.totalHours }} hrs</p>
+            <p>Courses: {{ package.package.length }}</p>
+            <p>Level: {{ package.level }}</p>
+            <p>Students: {{ package.students?.length }}</p>
+            <button *ngIf="!isEnrolled" class="btn btn-primary w-100" (click)="enroll()">Enroll Now</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h6>Path Statistics</h6>
+            <p>Completion Rate: {{ package.progress || 0 }}%</p>
+            <p>Average Rating: {{ package.rating || 0 }}</p>
+            <p>Job Market: High Demand</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

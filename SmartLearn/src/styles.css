@@ -1,0 +1,30 @@
+/* Light Theme */
+.light-theme {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  .light-theme .navbar {
+    background-color: #f8f9fa !important;
+    color: #000 !important;
+  }
+  
+  .light-theme .navbar .nav-link {
+    color: #000 !important;
+  }
+  
+  /* Dark Theme */
+  .dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  .dark-theme .navbar {
+    background-color: #212529 !important;
+    color: #fff !important;
+  }
+  
+  .dark-theme .navbar .nav-link {
+    color: #fff !important;
+  }
+  

@@ -1,0 +1,19 @@
+<div class="container mt-5 text-center" *ngIf="loading">
+  <h3>⏳ Processing your payment...</h3>
+  <div class="spinner-border text-primary mt-3" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+  
+  <div class="container mt-5 text-center" *ngIf="!loading && success">
+    <h2 class="text-success">✅ Payment Successful!</h2>
+    <p>You will be redirected to your course shortly...</p>
+  </div>
+  
+  <div class="container mt-5 text-center" *ngIf="!loading && !success">
+    <h2 class="text-danger">❌ Payment Failed!</h2>
+    <p>Something went wrong while processing your payment.</p>
+    <a routerLink="/checkout" class="btn btn-dark">Try Again</a>
+  </div>
+  

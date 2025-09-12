@@ -1,0 +1,49 @@
+<div class="container mt-4" *ngIf="item && !loading && !error">
+  <div class="card shadow-sm rounded-3">
+    <div class="card-body">
+      <h5 class="card-title"><i class="bi bi-lock-fill"></i> Order Summary</h5>
+
+      <div class="d-flex align-items-center my-3">
+        <img [src]="item.coverImageURL" alt="item" class="rounded" width="70" height="70">
+        <div class="ms-3">
+          <h6 class="mb-0">{{ item.title }}</h6>
+          <small class="text-muted">by {{ item.instructorID?.name || 'N/A' }}</small><br>
+          <span class="text-warning">★ {{ item.rating || 0 }}</span>
+          <small class="text-muted">({{ getStudentCount() }} students)</small>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <span>Price</span>
+        <strong>
+          ${{ item.price || 0 }}
+          <span *ngIf="calculateDiscount() > 0">
+            (-{{ calculateDiscount() }}%)
+          </span>
+        </strong>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <span>Processing Fee</span>
+        <strong>${{ fee }}</strong>
+      </div>
+
+      <hr>
+
+      <div class="d-flex justify-content-between">
+        <span>Total</span>
+        <strong class="text-danger">${{ calculateTotal() }}</strong>
+      </div>
+
+      <button class="btn btn-dark w-100 mt-3" (click)="checkout()">Checkout</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loading" class="text-center mt-5">
+  Loading...
+</div>
+
+<div *ngIf="error" class="text-center mt-5 text-danger">
+  ❌ Item not found or error occurred.
+</div>

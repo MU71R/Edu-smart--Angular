@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">👩‍🏫 Pending Instructors</h2>
+  
+    <div *ngIf="loading" class="text-center">
+      <div class="spinner-border text-primary"></div>
+    </div>
+  
+    <div *ngIf="!loading && instructors.length === 0" class="alert alert-info text-center">
+      لا يوجد مدرّسين في انتظار الموافقة ✅
+    </div>
+  
+    <table *ngIf="!loading && instructors.length > 0" class="table table-hover shadow rounded">
+      <thead class="table-primary">
+        <tr>
+          <th>👤 Name</th>
+          <th>📧 Email</th>
+          <th>🎭 Role</th>
+          <th>⚡ Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let instructor of instructors">
+          <td>{{ instructor.name }}</td>
+          <td>{{ instructor.email }}</td>
+          <td>{{ instructor.role }}</td>
+          <td>
+            <button class="btn btn-outline-primary btn-sm"
+                    (click)="viewDetails(instructor._id)">
+              عرض التفاصيل ➝
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

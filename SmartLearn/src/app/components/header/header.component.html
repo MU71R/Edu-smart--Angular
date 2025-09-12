@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <!-- Logo -->
+    <a class="navbar-brand" routerLink="/home">EduSmart</a>
+
+    <!-- Hamburger Menu (Mobile) -->
+    <button class="navbar-toggler" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link link-hover" routerLink="/home" routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-hover" routerLink="/courses-list" routerLinkActive="active">Courses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-hover" routerLink="/packages" routerLinkActive="active">Learning Paths</a>
+        </li>
+      </ul>
+
+      <!-- Actions -->
+      <div class="d-flex align-items-center gap-2">
+        <!-- زر Login يظهر فقط لو مش عامل تسجيل دخول -->
+        <button *ngIf="!isLoggedIn" class="btn btn-primary" routerLink="/login">Login</button>
+
+        <!-- User Dropdown يظهر فقط لو عامل تسجيل دخول -->
+        <div *ngIf="isLoggedIn" class="dropdown">
+          <a 
+            class="d-flex align-items-center justify-content-center rounded-circle bg-light" 
+            href="#" 
+            id="userDropdown" 
+            role="button" 
+            data-bs-toggle="dropdown" 
+            aria-expanded="false"
+            style="width: 40px; height: 40px;"
+          >
+            <i class="fas fa-user"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+            <li><a class="dropdown-item" routerLink="/massages">Messages</a></li>
+            <li *ngIf="userData.role === 'student'" ><a class="dropdown-item" routerLink="/dashboard-student">Dashboard</a></li>
+            <li *ngIf="userData.role === 'instructor'" ><a class="dropdown-item" routerLink="/instructor-dashboard">Dashboard</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a 
+              class="dropdown-item text-danger" 
+              href="javascript:void(0)" 
+              (click)="logout()"
+            >
+              Logout
+            </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

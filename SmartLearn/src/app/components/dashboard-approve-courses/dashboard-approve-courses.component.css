@@ -1,0 +1,17 @@
+h2 {
+    color: #2c3e50;
+  }
+  
+  .table {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  button {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+  }
+  

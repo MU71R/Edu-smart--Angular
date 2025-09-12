@@ -1,0 +1,31 @@
+<div class="container mt-5" *ngIf="loading">
+    <div class="text-center">
+      <div class="spinner-border text-primary"></div>
+    </div>
+  </div>
+  
+  <div class="container mt-5" *ngIf="!loading && course">
+    <h2 class="mb-4 text-center">📖 Course Details</h2>
+    <img *ngIf="course.coverImageURL" [src]="course.coverImageURL" class="img-fluid rounded shadow mb-3" alt="Course Image">
+    <div class="card shadow p-3">
+      <h4>Title: {{ course.title }}</h4>
+      <p><strong>Description:</strong> {{ course.description }}</p>
+      <p><strong>Category:</strong> {{ course.categoryID || 'بدون تصنيف' }}</p>
+      <p><strong>Instructor:</strong> {{ course.instructorID?.name || 'Unknown' }}</p>
+      <p><strong>Price:</strong> {{ course.price }} USD</p>
+      <p><strong>Level:</strong> {{ course.level }}</p>
+      <p><strong>Language:</strong> {{ course.language }}</p>
+      <p><strong>Estimated Duration:</strong> {{ course.estimatedDuration }} hours</p>
+      <p><strong>Created At:</strong> {{ course.createdAt | date:'medium' }}</p>
+  
+      <div class="mt-3">
+        <button class="btn btn-success me-2" (click)="approveInstructor(course._id)">✔ Approve</button>
+        <button class="btn btn-danger" (click)="rejectInstructor(course._id)">✖ Reject</button>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="!loading && error" class="alert alert-danger text-center">
+    {{ error }}
+  </div>
+  

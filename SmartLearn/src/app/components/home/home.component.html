@@ -1,0 +1,161 @@
+<div class="container py-5">
+  <!-- Hero Section -->
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <h1 class="fw-bold display-5">Learn Skills That Matter</h1>
+      <p class="lead text-muted">
+        Master new technologies with personalized learning paths and AI-powered recommendations
+      </p>
+      <div class="d-flex gap-3 mt-3">
+        <button class="btn btn-primary btn-lg">
+          <fa-icon [icon]="faArrowRight"> </fa-icon> Start Learning</button>
+        <button class="btn btn-outline-dark btn-lg">
+          <fa-icon [icon]="video"> </fa-icon> Watch Demo
+        </button>
+      </div>
+      <div class="d-flex gap-4 mt-5 text-center">
+        <div>
+          <h5 class="fw-bold mb-0">50K+</h5>
+          <small class="text-muted">Students</small>
+        </div>
+        <div>
+          <h5 class="fw-bold mb-0">500+</h5>
+          <small class="text-muted">Courses</small>
+        </div>
+        <div>
+          <h5 class="fw-bold mb-0">100+</h5>
+          <small class="text-muted">Instructors</small>
+        </div>
+        <div>
+          <h5 class="fw-bold mb-0">95%</h5>
+          <small class="text-muted">Success Rate</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 text-center position-relative">
+      <img
+        src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=700&q=80"
+        alt="Students"
+        class="img-fluid rounded shadow"
+      />
+      <span
+        class="badge bg-primary position-absolute end-0 bottom-0 m-3 p-2 px-3 shadow"
+      >
+        <i class="bi bi-people-fill"></i> Live: 1,234 students
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- Popular Courses -->
+<div class="container py-5" *ngIf="popularCourses.length > 0">
+  <h2 class="fw-bold text-center">Popular Courses</h2>
+  <p class="text-muted text-center mb-5">
+    Discover the most loved courses by our community
+  </p>
+    
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="row g-4">
+    <div class="col-md-3" *ngFor="let item of [1,2,3,4,5,6,7,8]">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-img-top bg-secondary placeholder-glow" style="height:150px;"></div>
+        <div class="card-body">
+          <h6 class="card-title placeholder-glow">
+            <span class="placeholder col-8"></span>
+          </h6>
+          <p class="placeholder-glow">
+            <span class="placeholder col-6"></span>
+          </p>
+          <p class="placeholder-glow">
+            <span class="placeholder col-4"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>  
+  
+    <!-- Error Alert -->
+    <div *ngIf="error" class="alert alert-danger text-center" role="alert">
+      {{ error }}
+    </div>
+
+    
+ <!-- Courses Grid -->
+ <div class="row g-4" *ngIf="!loading && !error && popularCourses.length > 0">
+  <div class="col-md-3" *ngFor="let course of popularCourses">
+    <div class="card h-100 shadow-sm border-0" (click)="getCourseById(course._id)">
+      <img [src]="course.coverImageURL" class="card-img-top" [alt]="course.title">
+      <div class="card-body">
+        <h6 class="card-title fw-bold">{{ course.title }}</h6>
+        <p class="card-text">{{ course.description }}</p>
+        <p class="text-muted small mb-1">by {{ course.instructorID?.name }}</p>
+        <p class="text-muted small mb-1">{{ course.level }}</p>
+        <p class="text-muted small mb-1">{{ course.categoryID}}</p>
+        <p class="text-warning small mb-2">
+          ★ {{ course.rating }} ({{ course.students }})
+        </p>
+        <span class="badge" 
+              [ngClass]="{
+                'bg-success': course.level === 'Beginner',
+                'bg-secondary': course.level === 'Intermediate',
+                'bg-dark': course.level === 'Advanced'
+              }">
+          {{ course.level }}
+        </span>
+      </div>
+      <div class="card-footer bg-white border-0">
+        <span class="fw-bold text-primary" *ngIf="course.price !== 0">${{ course.price }}</span>
+        <span class="fw-bold text-success" *ngIf="course.price === 0">Free</span>
+        <span class="text-muted text-decoration-line-through" *ngIf="course.discount">
+          ${{ course.discount }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- No Courses Found -->
+<div *ngIf="!loading && !error && popularCourses.length === 0" class="text-center text-muted my-5">
+  No courses available at the moment.
+</div>
+</div>
+
+<div class="container py-5">
+  <!-- Categories Section -->
+  <div class="text-center mb-5">
+    <h2>Categories</h2>
+    <p class="text-muted">Explore courses by category</p>
+  </div>
+
+  <div class="row g-4 justify-content-center">
+    <div class="col-md-4 col-lg-3" *ngFor="let category of categories">
+      <div class="card shadow-sm text-center p-3 h-100">
+        <div class="card-body">
+          <i [class]="category.icon" style="font-size: 2rem; color:#4f46e5;" class="icon"></i>
+          <h5 class="card-title">{{ category.name }}</h5>
+          <p class="text-muted">{{ category.courses }} courses</p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Why Choose Section -->
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <h2>Why Choose EduSmart?</h2>
+    <p class="text-muted">We're more than just an online learning platform</p>
+  </div>
+
+  <div class="row g-4 text-center">
+    <div class="col-md-3" *ngFor="let feature of features">
+      <div class="p-4 border rounded shadow-sm h-100">
+        <div class="mb-3">
+          <i [class]="feature.icon" style="font-size: 2rem; color:#4f46e5;"></i>
+        </div>
+        <h5>{{ feature.title }}</h5>
+        <p class="text-muted">{{ feature.desc }}</p>
+      </div>
+    </div>
+</div>
+</div>

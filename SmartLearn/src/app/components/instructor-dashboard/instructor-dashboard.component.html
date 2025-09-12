@@ -1,0 +1,54 @@
+<div class="dashboard-container">
+
+  <!-- Dashboard header -->
+  <header class="dashboard-header">
+    <div class="header-left">
+      <h1>👋 Welcome back, <span>{{ instructorName }}</span></h1>
+      <p class="subtitle">Here’s a quick overview of your teaching activity</p>
+    </div>
+    <div class="header-right">
+      <button class="btn-create" (click)="openModal()">+ Create Course</button>
+      <button class="btn-create ms-2" (click)="openLessonModal()">+ Create Lesson</button>
+    </div>
+    <app-course-create *ngIf="showModal" (close)="closeModal()"></app-course-create>
+    <app-create-lesson [showModal]="showLessonModal" (close)="closeLessonModal()"></app-create-lesson>
+  </header>
+
+  <!-- Stats Section -->
+  <div class="stats-container">
+    <div class="stat-card">
+      <h3>Total Courses</h3>
+      <p>{{ courses.length }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>Total Students</h3>
+      <p>{{ totalStudents }}</p>
+    </div>
+  </div>
+
+<!-- My Courses Section -->
+<section class="my-courses">
+  <h2>My Courses</h2>
+  <div class="courses-grid">
+    <div *ngFor="let course of courses" class="course-card">
+      
+      <!-- صورة الكورس -->
+      <div class="course-thumb">
+        <img [src]="course.coverImageURL || 'assets/default-course.png'" alt="{{ course.title }}">
+      </div>
+      
+      <!-- تفاصيل الكورس -->
+      <div class="course-info">
+        <h3>{{ course.title }}</h3>
+        <p class="meta">{{ course.categoryID }} • {{ course.level }}</p>
+
+        <!-- الأزرار -->
+        <div class="course-actions">
+          <button class="btn-view" (click)="viewCourse(course._id)">View</button>
+          <button class="btn-delete" (click)="deleteCourse(course._id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>

@@ -1,0 +1,161 @@
+<!-- Register Form -->
+<div class="register-container">
+  <div class="register-box">
+    <h2>Create Account</h2>
+
+    <form (ngSubmit)="submitRegister()">
+      <!-- Full Name -->
+      <div class="field-wrapper">
+        <input
+          type="text"
+          [(ngModel)]="formData.name"
+          name="name"
+          placeholder="Full Name"
+          required
+          (blur)="onBlur('name')"
+          [class.hidden-input]="completedFields.has('name')"
+        />
+        <div *ngIf="completedFields.has('name')" class="field-value">
+          {{ formData.name }}
+          <span class="edit-btn" (click)="editField('name')">✏️ Edit</span>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="field-wrapper">
+        <input
+          type="email"
+          [(ngModel)]="formData.email"
+          name="email"
+          placeholder="Email"
+          required
+          (blur)="onBlur('email')"
+          [class.hidden-input]="completedFields.has('email')"
+        />
+        <div *ngIf="completedFields.has('email')" class="field-value">
+          {{ formData.email }}
+          <span class="edit-btn" (click)="editField('email')">✏️ Edit</span>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="field-wrapper">
+        <input
+          type="password"
+          [(ngModel)]="formData.password"
+          name="password"
+          placeholder="Password"
+          required
+          (blur)="onBlur('password')"
+          [class.hidden-input]="completedFields.has('password')"
+        />
+        <div *ngIf="completedFields.has('password')" class="field-value">
+          ••••••••
+          <span class="edit-btn" (click)="editField('password')">✏️ Edit</span>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="field-wrapper">
+        <input
+          type="tel"
+          [(ngModel)]="formData.phonenumber"
+          name="phonenumber"
+          placeholder="Phone Number"
+          required
+          (blur)="onBlur('phonenumber')"
+          [class.hidden-input]="completedFields.has('phonenumber')"
+        />
+        <div *ngIf="completedFields.has('phonenumber')" class="field-value">
+          {{ formData.phonenumber }}
+          <span class="edit-btn" (click)="editField('phonenumber')">✏️ Edit</span>
+        </div>
+      </div>
+
+      <!-- City -->
+      <div class="field-wrapper">
+        <input
+          type="text"
+          [(ngModel)]="formData.city"
+          name="city"
+          placeholder="City"
+          required
+          (blur)="onBlur('city')"
+          [class.hidden-input]="completedFields.has('city')"
+        />
+        <div *ngIf="completedFields.has('city')" class="field-value">
+          {{ formData.city }}
+          <span class="edit-btn" (click)="editField('city')">✏️ Edit</span>
+        </div>
+      </div>
+
+      <!-- فقط للمدرسين: رفع الشهادة -->
+      <div class="field-wrapper" *ngIf="formData.role === 'instructor'">
+        <label for="certificate">Upload Certificate</label>
+        <input
+          type="file"
+          id="certificate"
+          (change)="onFileSelected($event)"
+          accept=".pdf,.jpg,.jpeg,.png"
+          required
+        />
+      </div>
+
+      <!-- Role -->
+      <button type="button" class="btn-role" (click)="openRoleModal()">
+        Choose Your Role
+      </button>
+
+      <!-- Submit -->
+      <button type="submit" class="btn-primary">Sign Up</button>
+    </form>
+
+    <div class="divider">OR CONTINUE WITH</div>
+
+    <button class="btn-google">
+      <img
+        src="https://www.svgrepo.com/show/355037/google.svg"
+        alt="Google"
+      />
+      Continue with Google
+    </button>
+
+    <p class="login-text">
+      Already have an account?
+      <a routerLink="/login">Sign in</a>
+    </p>
+  </div>
+</div>
+
+<!-- Role Selection Modal -->
+<div class="modal-backdrop" *ngIf="showRoleModal">
+  <div class="modal-box">
+    <h3>Choose Your Role</h3>
+    <p class="subtitle">
+      Help us personalize your experience by selecting your role
+    </p>
+
+    <div
+      class="role-option"
+      [class.active]="formData.role === 'student'"
+      (click)="selectRole('student')"
+    >
+      <span>🎓 Student</span>
+      <small>I want to learn new skills</small>
+    </div>
+
+    <div
+      class="role-option"
+      [class.active]="formData.role === 'instructor'"
+      (click)="selectRole('instructor')"
+    >
+      <span>👨‍🏫 Instructor</span>
+      <small>I want to teach and create courses</small>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="closeRoleModal()">Cancel</button>
+      <button class="btn-continue" (click)="closeRoleModal()">Continue</button>
+    </div>
+  </div>
+</div>

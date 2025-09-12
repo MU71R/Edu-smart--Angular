@@ -1,0 +1,18 @@
+body, html {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .card {
+    border-radius: 1rem;
+    background-color: #fff;
+  }
+  
+  h3.card-title {
+    font-weight: bold;
+  }
+  
+  p.card-text {
+    font-size: 1rem;
+  }
+  

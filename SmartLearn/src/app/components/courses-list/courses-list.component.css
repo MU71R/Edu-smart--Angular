@@ -1,0 +1,28 @@
+.search-box {
+  margin-bottom: 1rem;
+}
+
+.search-box input {
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.courses {
+  list-style: none;
+  padding: 0;
+}
+
+.courses li {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+.sidebar-filter {
+  min-height: 100vh; /* ياخد طول الشاشة */
+  position: sticky;
+  top: 0; /* يفضل ثابت عند الاسكرول */
+}

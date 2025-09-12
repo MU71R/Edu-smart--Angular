@@ -1,0 +1,26 @@
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">👤 User Details</h2>
+  
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="text-center my-4">
+      <div class="spinner-border text-primary"></div>
+    </div>
+  
+    <!-- User Details -->
+    <div *ngIf="!loading && user" class="card shadow rounded p-4 mx-auto" style="max-width: 500px;">
+      <div class="card-body text-center">
+        <h4 class="card-title mb-3">{{ user.name }}</h4>
+        <p class="card-text"><strong>📧 Email:</strong> {{ user.email }}</p>
+        <p class="card-text"><strong>🎭 Role:</strong> {{ user.role }}</p>
+      </div>
+      <div class="card-footer text-center">
+        <button class="btn btn-secondary" (click)="goBack()">← Back</button>
+      </div>
+    </div>
+  
+    <!-- لا يوجد مستخدم -->
+    <div *ngIf="!loading && !user" class="alert alert-warning text-center mt-4">
+      ⚠️ لا يوجد بيانات لهذا المستخدم
+    </div>
+  </div>
+  

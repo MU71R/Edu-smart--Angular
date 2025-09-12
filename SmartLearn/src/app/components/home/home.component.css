@@ -1,0 +1,84 @@
+  .card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: none !important;
+    height: 1rem;
+    width: 20rem;
+  }
+
+  .card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-text{
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    overflow: hidden;
+    width: 100%;
+    height: 50px;
+  }
+ 
+  .card img {
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover img {
+    transform: scale(1.08);
+  }
+
+  .card-body {
+    padding: 1rem 1.2rem;
+  }
+
+  .card-body h6 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .card-body p {
+    margin-bottom: 0.3rem;
+  }
+  .icon{
+    font-size: 2rem;
+    color:#4f46e5;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  .text-muted{
+    font-size: 0.9rem;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: none;
+    background: transparent;
+    font-size: 0.95rem;
+  }
+
+  .card-footer .fw-bold {
+    font-size: 1.1rem;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.4em 0.7em;
+    border-radius: 30px;
+  }
+  .container-Hero{
+    background-color: #f8f9fa;
+  }
+  .card {
+    border-radius: 15px;
+    transition: transform 0.2s ease-in-out;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }

@@ -1,0 +1,47 @@
+<div class="dashboard-overview p-4">
+
+  <!-- جرس الإشعارات -->
+  <div class="d-flex justify-content-end mb-4 position-relative">
+    <div class="notification-bell position-relative me-3">
+      <i class="fa fa-bell" (click)="toggleNotifications()" style="font-size: 1.8rem; cursor: pointer;"></i>
+      <span *ngIf="unreadCount > 0" class="badge bg-danger position-absolute top-0 start-100 translate-middle">
+        {{ unreadCount }}
+      </span>
+      <div *ngIf="showDropdown" class="notifications-dropdown shadow p-2">
+        <div *ngFor="let notif of notifications" class="notification-item">
+          <i class="bi bi-info-circle me-2"></i>
+          {{ notif.message }}
+          <small class="text-muted d-block">{{ notif.createdAt | date:'short'}}</small>
+        </div>
+        <div *ngIf="notifications.length === 0" class="text-center text-muted">لا توجد إشعارات</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- كروت الإحصائيات -->
+  <div class="stats d-flex flex-wrap gap-3 mb-4">
+    <div class="stat-card" *ngFor="let stat of stats" [ngStyle]="{'background': stat.bg}">
+      <i class="fa" [ngClass]="stat.icon" style="font-size: 2rem;"></i>
+      <h3>{{ stat.value | number }}</h3>
+      <p>{{ stat.title }}</p>
+    </div>
+  </div>
+
+  <!-- روابط سريعة -->
+  <div class="quick-actions d-flex gap-3 flex-wrap">
+    <button class="btn btn-primary" (click)="addUser()"><i class="bi bi-person-plus me-2"></i>إضافة مستخدم</button>
+    <button class="btn btn-success" (click)="goToUsers()"><i class="bi bi-people me-2"></i>عرض المستخدمين</button>
+    <button class="btn btn-info" (click)="goToCourses()"><i class="bi bi-card-checklist me-2"></i>عرض الدورات</button>
+  </div>
+
+  <!-- آخر الأنشطة -->
+  <div class="recent-activity mb-5">
+    <h4>آخر الأنشطة</h4>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let activity of recentActivities">
+        <i class="bi bi-info-circle me-2"></i> {{ activity.message }}
+        <small class="text-muted d-block">{{ activity.time | date:'short'}}</small>
+      </li>
+    </ul>
+  </div>
+</div>

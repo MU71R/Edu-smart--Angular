@@ -1,0 +1,89 @@
+<div class="container-fluid mt-4">
+  <div class="row">
+    <!-- 🟦 سايد بار الفلاتر -->
+    <div class="col-md-3">
+      <div class="card shadow-sm h-100" style="min-height: 100vh;">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Filters</h5>
+
+          <!-- 🔍 البحث -->
+          <div class="mb-3">
+            <label class="form-label">Search</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="searchText"
+              placeholder="Search courses..."
+            />
+          </div>
+          
+
+          <!-- 📂 الكاتيجوري -->
+          <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select class="form-select" [(ngModel)]="filters.categoryId">
+              <option value="all">All Categories</option>
+              <option [value]="Categories.FRONTEND">Frontend</option>
+              <option [value]="Categories.BACKEND">Backend</option>
+              <option [value]="Categories.AI">AI</option>
+            </select>
+          </div>
+
+          <!-- 💲 السعر -->
+          <div class="mb-3">
+            <label class="form-label">Max Price</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="filters.maxPrice"
+              placeholder="Enter max price"
+            />
+          </div>
+
+          <!-- زر Reset -->
+          <div class="mt-4">
+            <!-- <button
+              class="btn btn-outline-secondary w-100"
+              (click)="resetFilters()"
+            >
+              Reset Filters
+            </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🟦 الكورسات -->
+    <div class="col-md-9">
+      <div class="row">
+        <div
+          class="col-md-4 mb-4"
+          *ngFor="let course of courses | courseFilter: searchText : filters">
+          <div class="card h-100 shadow-sm">
+            <img
+              [src]="course.coverImageURL || 'assets/default-course.jpg'"
+              class="card-img-top"
+              alt="{{ course.title }}"
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ course.title }}</h5>
+              <p class="card-text text-muted">{{ course.description }}</p>
+              <span class="badge bg-info">{{ course.categoryID }}</span>
+            </div>
+            <div
+              class="card-footer d-flex justify-content-between align-items-center"
+            >
+              <span class="text-success fw-bold">${{ course.price }}</span>
+              <button 
+              class="btn btn-primary btn-sm"
+              [routerLink]="['/course-details', course._id]">
+              View Details
+            </button>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

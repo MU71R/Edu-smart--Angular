@@ -1,0 +1,85 @@
+<div class="container py-5">
+  <h2 class="text-center mb-4">Choose Your Learning Path</h2>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2">Loading packages...</p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="error" class="alert alert-danger text-center">{{ error }}</div>
+
+  <!-- Empty -->
+  <div *ngIf="!loading && !error && packages.length === 0" class="text-center py-5">
+    <p>No packages available.</p>
+  </div>
+
+  <!-- Packages Grid -->
+  <div class="row g-4" *ngIf="!loading && !error && packages.length > 0">
+    <div class="col-md-6 col-lg-4" *ngFor="let pkg of packages">
+      <div class="card shadow-sm h-100 package-card">
+        <!-- Image -->
+        <div class="position-relative overflow-hidden" style="height:200px;">
+          <img [src]="pkg.coverImageURL" [alt]="pkg.title" class="card-img-top h-100 w-100 object-fit-cover">
+          <span *ngIf="pkg.discountPercentage > 0" class="badge bg-danger position-absolute top-2 start-2">
+            -{{ pkg.discountPercentage }}%
+          </span>
+          <span class="badge bg-light text-dark position-absolute top-2 end-2">{{ pkg.level }}</span>
+        </div>
+
+        <!-- Content -->
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ pkg.title }}</h5>
+          <p class="card-text text-muted line-clamp">{{ pkg.description }}</p>
+
+          <div class="d-flex justify-content-between text-muted small my-2">
+            <span>
+              <i class="fa fa-book"></i> {{ pkg.package?.length || 0 }} Courses
+            </span>
+            <span>
+              <i class="fa fa-users"></i> {{ pkg.students?.length || 0 }} Students
+            </span>            
+            <span><i class="fa fa-star"></i> {{ pkg.rating }}</span>
+          </div>
+
+          <div class="my-2">
+            <span *ngIf="!pkg.isFree" class="fw-bold text-primary">${{ pkg.price }}</span>
+            <span *ngIf="pkg.originalPrice && !pkg.isFree" class="text-decoration-line-through text-muted ms-2">
+              ${{ pkg.originalPrice }}
+            </span>
+            <span *ngIf="pkg.isFree" class="badge bg-success">FREE</span>
+          </div>
+
+          <div *ngIf="pkg.progress > 0" class="my-2">
+            <div class="d-flex justify-content-between small">
+              <span>Your Progress</span>
+              <span>{{ pkg.progress }}%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar bg-success" role="progressbar" [style.width.%]="pkg.progress"></div>
+            </div>
+          </div>
+
+          <div class="my-2">
+            <strong class="small">Key Skills:</strong>
+            <div class="d-flex flex-wrap gap-1 mt-1">
+              <span *ngFor="let skill of pkg.keySkills" class="badge border border-primary text-primary">{{ skill }}</span>
+            </div>
+          </div>
+
+          <div class="my-2">
+            <strong class="small">Career Paths:</strong>
+            <ul class="small text-muted ps-3 mb-0">
+              <li *ngFor="let path of pkg.careerPaths">{{ path }}</li>
+            </ul>
+          </div>
+
+          <div class="mt-auto pt-3">
+            <button class="btn btn-primary w-100" (click)="viewDetails(pkg)">View Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

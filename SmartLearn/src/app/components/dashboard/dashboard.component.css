@@ -1,0 +1,30 @@
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    border-right: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  .sidebar ul li {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+    margin-bottom: 5px;
+  }
+  
+  .sidebar ul li:hover,
+  .sidebar ul li.active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .main-content {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    border-left: 1px solid rgba(0,0,0,0.05);
+  }
+  
+  i {
+    font-size: 1.2rem;
+  }
+  

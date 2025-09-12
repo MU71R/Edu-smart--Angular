@@ -1,0 +1,229 @@
+
+/* Container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f9f9fb;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Box */
+  .login-box {
+    background: #fff;
+    padding: 40px 35px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+  }
+  
+  /* Titles */
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 24px;
+  }
+  
+  /* Input group */
+  .input-group {
+    display: flex;
+    align-items: center;
+    background: #f1f3f6;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  
+  .input-group .icon {
+    margin-right: 8px;
+    font-size: 16px;
+    color: #777;
+  }
+  
+  .input-group input {
+    border: none;
+    outline: none;
+    flex: 1;
+    background: transparent;
+    font-size: 14px;
+  }
+  
+  .input-group .toggle {
+    cursor: pointer;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  /* Forgot password */
+  .forgot {
+    display: block;
+    text-align: right;
+    font-size: 13px;
+    color: #007bff;
+    margin-bottom: 20px;
+    text-decoration: none;
+  }
+  
+  /* Buttons */
+  .btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: #2563eb;
+    color: white;
+    font-size: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background: #1d4ed8;
+  }
+  
+  /* Divider */
+  .divider {
+    font-size: 12px;
+    color: #aaa;
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+    margin: 0 10px;
+  }
+  
+  /* Google button */
+  .btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+  
+  .btn-google img {
+    width: 20px;
+  }
+  
+  .btn-google:hover {
+    background: #f9f9f9;
+  }
+  
+  /* Signup */
+  .signup-text {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #555;
+  }
+  
+  .signup-text a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+  }
+/* ==== Responsive Design ==== */
+@media (max-width: 768px) {
+    .login-box {
+      padding: 25px 20px;
+      max-width: 90%;
+      border-radius: 12px;
+    }
+  
+    .title {
+      font-size: 20px;
+    }
+  
+    .subtitle {
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+  
+    .input-group {
+      padding: 8px 10px;
+    }
+  
+    .input-group input {
+      font-size: 13px;
+    }
+  
+    .btn-primary,
+    .btn-google {
+      padding: 10px;
+      font-size: 14px;
+    }
+  
+    .divider {
+      font-size: 11px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .login-container {
+      padding: 10px;
+    }
+  
+    .login-box {
+      padding: 20px 15px;
+      max-width: 100%;
+      border-radius: 10px;
+    }
+  
+    .title {
+      font-size: 18px;
+    }
+  
+    .subtitle {
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+  
+    .input-group {
+      padding: 7px 8px;
+    }
+  
+    .input-group input {
+      font-size: 12px;
+    }
+  
+    .btn-primary,
+    .btn-google {
+      padding: 8px;
+      font-size: 13px;
+    }
+  
+    .divider {
+      font-size: 10px;
+    }
+  
+    .signup-text {
+      font-size: 12px;
+    }
+  }
+  

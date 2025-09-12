@@ -1,0 +1,35 @@
+<div class="container mt-5" *ngIf="!loading && instructor; else loadingTpl">
+    <!-- شهادة المدرس -->
+    <div class="text-center mb-4">
+      <h4>شهادة المدرس</h4>
+      <img *ngIf="instructor.certificateURL" [src]="instructor.certificateURL" class="img-fluid rounded shadow" style="max-height: 250px;" alt="Certificate">
+      <p *ngIf="!instructor.certificateURL">لا يوجد شهادة مرفقة</p>
+    </div>
+  
+    <!-- بيانات المدرس -->
+    <div class="card p-4 shadow mb-4">
+      <h5>بيانات المدرس</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>الاسم:</strong> {{ instructor.name }}</li>
+        <li class="list-group-item"><strong>الإيميل:</strong> {{ instructor.email }}</li>
+        <li class="list-group-item"><strong>الدور:</strong> {{ instructor.role }}</li>
+      </ul>
+    </div>
+  
+    <!-- أزرار الموافقة / الرفض -->
+    <div class="text-center">
+      <button class="btn btn-success mx-2" [disabled]="actionLoading" (click)="approveInstructor()">
+        ✅ موافقة
+      </button>
+      <button class="btn btn-danger mx-2" [disabled]="actionLoading" (click)="rejectInstructor()">
+        ❌ رفض
+      </button>
+    </div>
+  </div>
+  
+  <ng-template #loadingTpl>
+    <div class="text-center mt-5">
+      <div class="spinner-border text-primary"></div>
+    </div>
+  </ng-template>
+  

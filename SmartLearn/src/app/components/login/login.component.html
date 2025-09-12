@@ -1,0 +1,88 @@
+<div class="login-container">
+  <div class="login-box">
+    <h2 class="title">
+      {{ showReset ? 'Reset Your Password' : (showForget ? 'Forgot Password' : 'Welcome Back') }}
+    </h2>
+    <p class="subtitle">
+      {{ showReset ? 'Enter OTP and new password' : (showForget ? 'Enter your email to reset password' : 'Enter your credentials to access your account') }}
+    </p>
+
+    <form [formGroup]="showReset ? resetForm : (showForget ? forgotForm : form)"
+          (ngSubmit)="showReset ? onResetPassword() : (showForget ? onForgotPassword() : onSubmit())">
+
+      <!-- Email -->
+      <div class="input-group" *ngIf="!showReset">
+        <span class="icon">@</span>
+        <input type="email"
+               [formControlName]="showForget ? 'emailvar' : 'emailvar'"
+               placeholder="john@example.com" required />
+      </div>
+      <div class="error" 
+           *ngIf="(showForget ? forgetEmailControl : email)?.invalid && ((showForget ? forgetEmailControl : email)?.dirty || (showForget ? forgetEmailControl : email)?.touched)">
+        <small *ngIf="(showForget ? forgetEmailControl : email)?.errors?.['required']">Email is required.</small>
+        <small *ngIf="(showForget ? forgetEmailControl : email)?.errors?.['email']">Invalid email address.</small>
+      </div>
+
+      <!-- Password (Login only) -->
+      <div class="input-group" *ngIf="!showForget && !showReset">
+        <span class="icon">🔒</span>
+        <input [type]="showPassword ? 'text' : 'password'" formControlName="passwordvar" placeholder="••••••••" required />
+        <span class="toggle" (click)="showPassword = !showPassword">👁</span>
+      </div>
+      <div class="error"
+           *ngIf="!showForget && !showReset && password?.invalid && (password?.dirty || password?.touched)">
+        <small *ngIf="password?.errors?.['required']">Password is required.</small>
+        <small *ngIf="password?.errors?.['minlength']">At least 8 characters.</small>
+      </div>
+
+      <!-- OTP (Reset only) -->
+      <div class="input-group" *ngIf="showReset">
+        <span class="icon">#</span>
+        <input type="text" formControlName="otp" placeholder="Enter OTP" />
+      </div>
+
+      <!-- New Password (Reset only) -->
+      <div class="input-group" *ngIf="showReset">
+        <span class="icon">🔑</span>
+        <input [type]="showPassword ? 'text' : 'password'" formControlName="newPassword" placeholder="New Password" />
+      </div>
+      <div class="input-group" *ngIf="showReset">
+        <span class="icon">✅</span>
+        <input [type]="showPassword ? 'text' : 'password'" formControlName="confirmPassword" placeholder="Confirm Password" />
+      </div>
+
+      <!-- Error / Success Messages -->
+      <div *ngIf="errorMessage" class="alert error">{{ errorMessage }}</div>
+      <div *ngIf="forgetError" class="alert error">{{ forgetError }}</div>
+      <div *ngIf="forgetSuccess" class="alert success">{{ forgetSuccess }}</div>
+      <div *ngIf="resetError" class="alert error">{{ resetError }}</div>
+      <div *ngIf="resetSuccess" class="alert success">{{ resetSuccess }}</div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn-primary">
+        {{ showReset ? 'Reset Password' : (showForget ? 'Send OTP' : 'Sign In') }}
+      </button>
+    </form>
+
+    <!-- Links -->
+    <a href="#" class="forgot" *ngIf="!showReset"
+       (click)="toggleForgetPassword(); $event.preventDefault();">
+      {{ showForget ? 'Back to Login' : 'Forgot password?' }}
+    </a>
+
+    <!-- Divider -->
+    <div class="divider" *ngIf="!showReset">OR CONTINUE WITH</div>
+
+    <!-- Google Button -->
+    <button class="btn-google" *ngIf="!showReset">
+      <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" />
+      Continue with Google
+    </button>
+
+    <!-- Signup Link -->
+    <p class="signup-text" *ngIf="!showReset">
+      Don’t have an account?
+      <a routerLink="/register">Sign up</a>
+    </p>
+  </div>
+</div>

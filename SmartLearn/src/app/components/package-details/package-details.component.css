@@ -1,0 +1,25 @@
+.package-header {
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .package-header .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); /* شفاف أسود */
+    border-radius: 10px;
+  }
+  
+  .package-header .header-content {
+    position: relative;
+    z-index: 2;
+  }
+  

@@ -1,0 +1,63 @@
+<div class="container py-5">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-3 mb-4">
+        <div class="card shadow-sm p-3 text-center">
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="rounded-circle mb-2"
+            alt="Profile Photo" width="100" height="100">
+  
+          <h6 class="fw-bold">{{ profileForm.get('name')?.value }}</h6>
+        </div>
+      </div>
+  
+  
+  
+  
+      <!-- Main Profile Form -->
+      <div class="col-md-9">
+        <div class="card shadow-sm p-4">
+          <h4 class="mb-4">Public Profile</h4>
+  
+          <form [formGroup]="profileForm" (ngSubmit)="onSave()">
+  
+            <!-- Editable -->
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" formControlName="name">
+            </div>
+  
+            <div class="mb-3">
+              <label class="form-label">City</label>
+              <input type="text" class="form-control" formControlName="city">
+            </div>
+  
+            <div class="mb-3">
+              <label class="form-label">Phone Number</label>
+              <input type="text" class="form-control" formControlName="phoneNumber">
+            </div>
+  
+            <!-- Read-only -->
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" formControlName="email" readonly>
+            </div>
+  
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" formControlName="password" readonly>
+            </div>
+  
+            <div class="mb-3">
+              <label class="form-label">Role</label>
+              <input type="text" class="form-control" formControlName="role" readonly>
+            </div>
+  
+            <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">
+              Save Changes
+            </button>
+          </form>
+        </div>
+      </div>
+  
+  </div>
+</div>

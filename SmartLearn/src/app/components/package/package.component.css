@@ -1,0 +1,13 @@
+.line-clamp {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .package-card img {
+    transition: transform 0.4s ease;
+  }
+  
+  .package-card:hover img {
+    transform: scale(1.05);
+  }

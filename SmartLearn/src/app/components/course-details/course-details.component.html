@@ -1,0 +1,37 @@
+<div class="container py-5" *ngIf="course">
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+      <div class="row g-0">
+        <!-- صورة الكورس -->
+        <div class="col-md-5">
+          <img [src]="course.coverImageURL" class="img-fluid h-100 w-100 object-fit-cover" alt="Course Image">
+        </div>
+  
+        <!-- تفاصيل الكورس -->
+        <div class="col-md-7 d-flex flex-column p-4">
+          <h2 class="fw-bold text-primary">{{ course.title }}</h2>
+          <p class="text-muted">{{ course.description }}</p>
+  
+          <h4 class="text-success fw-semibold mb-3">Price: ${{ course.price }}</h4>
+  
+          <!-- الأزرار -->
+          <div class="mt-auto">
+            <button class="btn btn-outline-secondary me-2" (click)="goBack()">
+              ← Back
+            </button>
+            <button class="btn btn-primary me-2" (click)="goToCheckout()">
+              🛒 Go to Checkout
+            </button>
+    
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Loading -->
+  <div class="text-center py-5" *ngIf="!course">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  

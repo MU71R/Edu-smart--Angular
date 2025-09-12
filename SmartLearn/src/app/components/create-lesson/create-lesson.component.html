@@ -1,0 +1,164 @@
+<!-- Modal -->
+<div class="modal fade show d-block" *ngIf="showModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content rounded-4 shadow-lg">
+  
+        <!-- Modal Header -->
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">Create New Lesson</h5>
+          <button type="button" class="btn-close btn-close-white" (click)="closeModal()"></button>
+        </div>
+  
+        <!-- Modal Body -->
+        <div class="modal-body p-4">
+          <form [formGroup]="lessonForm" (ngSubmit)="onSubmit()">
+  
+            <!-- Tabs -->
+            <ul class="nav nav-tabs mb-4" role="tablist">
+              <li class="nav-item">
+                <button class="nav-link" [class.active]="activeTab==='details'" type="button" (click)="activeTab='details'">Lesson Details</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" [class.active]="activeTab==='quiz'" type="button" (click)="activeTab='quiz'">Quiz</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" [class.active]="activeTab==='resources'" type="button" (click)="activeTab='resources'">Resources</button>
+              </li>
+            </ul>
+  
+<!-- Details Tab -->
+<div *ngIf="activeTab==='details'">
+    <div class="mb-3">
+      <label class="form-label">Select Course</label>
+      <select class="form-select" formControlName="courseID" (change)="onCourseChangeFromEvent($event)">
+        <option value="" disabled>Select course</option>
+        <option *ngFor="let course of myCourses" [value]="course._id">{{ course.title }}</option>
+      </select>
+    </div>
+  
+    <!-- اختيار درس موجود -->
+    <div class="mb-3" *ngIf="courseLessons.length > 0">
+      <label class="form-label">Select Existing Lesson (Optional)</label>
+      <select class="form-select" formControlName="existingLessonID">
+        <option [ngValue]="null">-- Create New Lesson --</option>
+        <option *ngFor="let lesson of courseLessons" [value]="lesson._id">{{ lesson.title }}</option>
+      </select>
+    </div>
+  
+    <!-- إنشاء درس جديد يظهر فقط لو ماختارش درس موجود -->
+    <div *ngIf="!lessonForm.get('existingLessonID')?.value">
+      <div class="mb-3">
+        <label class="form-label">Lesson Title</label>
+        <input type="text" class="form-control" formControlName="title" placeholder="Enter lesson title">
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Content</label>
+        <textarea class="form-control" formControlName="content" rows="3" placeholder="Lesson content"></textarea>
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Video URL (Optional)</label>
+        <input type="text" class="form-control" formControlName="videoURL" placeholder="https://...">
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Duration (minutes)</label>
+        <input type="number" class="form-control" formControlName="duration" min="1">
+      </div>
+  
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" formControlName="isPreview" id="previewCheck">
+        <label class="form-check-label" for="previewCheck">Allow preview</label>
+      </div>
+    </div>
+  </div>
+  
+  
+<!-- Quiz Tab -->
+<div *ngIf="activeTab==='quiz'">
+
+    <!-- اختيار درس موجود -->
+    <div class="mb-3">
+      <label class="form-label">Select Existing Lesson (Optional)</label>
+      <select class="form-select" formControlName="existingLessonID">
+        <option [ngValue]="null">-- No Lesson --</option>
+        <option *ngFor="let lesson of courseLessons" [value]="lesson._id">{{ lesson.title }}</option>
+      </select>
+    </div>
+  
+    <!-- اختيار كويز موجود -->
+    <div class="mb-3">
+      <label class="form-label">Link a Quiz (Optional)</label>
+      <select class="form-select" formControlName="requiredQuiz" (change)="onQuizSelectFromEvent($event)">
+        <option [ngValue]="null">-- No Quiz --</option>
+        <option *ngFor="let quiz of quizzes" [value]="quiz._id">{{ quiz.title }}</option>
+      </select>
+    </div>
+  
+    <div class="mb-3" *ngIf="lessonForm.get('requiredQuiz')?.value">
+      <label class="form-label">Required Score (%)</label>
+      <input type="number" class="form-control" formControlName="requiredScoreForAccess" min="0" max="100">
+    </div>
+  
+    <hr>
+  
+    <!-- إنشاء كويز جديد -->
+    <div>
+      <h6>{{ quizSectionTitle }}</h6>
+  
+      <div class="mb-3">
+        <label class="form-label">Quiz Title</label>
+        <input type="text" class="form-control" formControlName="newQuizTitle" placeholder="Enter quiz title">
+      </div>
+  
+      <div formArrayName="newQuizQuestions">
+        <div *ngFor="let q of newQuizQuestions.controls; let i=index" [formGroupName]="i" class="mb-3 border rounded p-2">
+          <label>Question {{i+1}}</label>
+          <input type="text" class="form-control mb-2" formControlName="questionText" placeholder="Enter question">
+  
+          <div formArrayName="options">
+            <div *ngFor="let opt of getOptionsControls(i); let j=index" class="input-group mb-2">
+              <input type="text" class="form-control" [formControlName]="j" placeholder="Option {{j+1}}">
+              <button type="button" class="btn btn-outline-danger btn-sm" (click)="removeOption(i,j)">X</button>
+            </div>
+            <button type="button" class="btn btn-outline-primary btn-sm" (click)="addOption(i)">+ Add Option</button>
+          </div>
+  
+          <div class="mt-2">
+            <label>Correct Answer Index</label>
+            <input type="number" class="form-control" formControlName="correctAnswer" min="0">
+          </div>
+  
+          <button type="button" class="btn btn-outline-danger btn-sm mt-2" (click)="removeQuestion(i)">Remove Question</button>
+        </div>
+  
+        <button type="button" class="btn btn-outline-success btn-sm" (click)="addQuestion()">+ Add Question</button>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+            <!-- Resources Tab -->
+            <div *ngIf="activeTab==='resources'" formArrayName="resources">
+              <div class="mb-3">
+                <label class="form-label">Resources (Optional)</label>
+                <div *ngFor="let res of resources.controls; let i=index" class="input-group mb-2">
+                  <input type="text" class="form-control" [formControlName]="i" placeholder="Resource link or note">
+                  <button class="btn btn-outline-danger btn-sm" type="button" (click)="removeResource(i)">Remove</button>
+                </div>
+                <button type="button" class="btn btn-outline-primary btn-sm mt-1" (click)="addResource()">+ Add Resource</button>
+              </div>
+            </div>
+  
+            <button type="submit" class="btn btn-primary w-100 mt-3">Create Lesson</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Backdrop -->
+  <div class="modal-backdrop fade show" *ngIf="showModal"></div>
+  
