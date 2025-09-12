@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PaymentService {
-  private apiUrl = 'https://edu-smart-a95n7si7w-mustafa-osamas-projects.vercel.app/payments'; // عنوان الباكند
+  private apiUrl = 'https://edu-smart-pink.vercel.app/payments'; // عنوان الباكند
 
   constructor(private http: HttpClient) {}
 

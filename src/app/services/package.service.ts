@@ -9,7 +9,7 @@ import { Package } from '../models/package';
 export class PackageService {
 
   constructor(private http: HttpClient) { }
-  private apiUrl = 'https://edu-smart-a95n7si7w-mustafa-osamas-projects.vercel.app/courses';
+  private apiUrl = 'https://edu-smart-pink.vercel.app/courses';
 
   getPackageById(id: string): Observable<Package> {
     return this.http.get<Package>(`${this.apiUrl}/get-package/${id}`);

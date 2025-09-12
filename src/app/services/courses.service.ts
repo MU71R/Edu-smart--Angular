@@ -7,7 +7,7 @@ import { Cours } from '../models/cours';
   providedIn: 'root'
 })
 export class CoursesService {
-  private baseUrl = 'https://edu-smart-a95n7si7w-mustafa-osamas-projects.vercel.app/courses'; 
+  private baseUrl = 'https://edu-smart-pink.vercel.app/courses'; 
 
   constructor(private http: HttpClient) {}
 

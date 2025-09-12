@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class EnrollmentsService {
 
-  private apiUrl = 'https://edu-smart-a95n7si7w-mustafa-osamas-projects.vercel.app/enrollments';
+  private apiUrl = 'https://edu-smart-pink.vercel.app/enrollments';
 
   constructor(private http: HttpClient) {}
 
