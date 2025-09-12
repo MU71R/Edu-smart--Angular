@@ -9,8 +9,8 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class DashboardService {
-  private apiUrl = 'http://localhost:3000/dashboard';
-  private adminUrl = 'http://localhost:3000/admin';
+  private apiUrl = 'https://edu-smart-a95n7si7w-mustafa-osamas-projects.vercel.app/dashboard';
+  private adminUrl = 'https://edu-smart-a95n7si7w-mustafa-osamas-projects.vercel.app/admin';
 
   constructor(private http: HttpClient) {}
 

@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class InstructorDashboardService {
-  private apiUrl2 = 'http://localhost:3000/courses';
+  private apiUrl2 = 'https://edu-smart-a95n7si7w-mustafa-osamas-projects.vercel.app/courses';
 
   constructor(private coursesService: CoursesService, private http: HttpClient,private authService: AuthService) {}
   instructorId: string = this.authService.decodeToken().id;

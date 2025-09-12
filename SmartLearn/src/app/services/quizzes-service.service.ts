@@ -8,7 +8,7 @@ import { Quiz } from '../models/quiz';
 })
 export class QuizzesServiceService {
 
-  private baseUrl = 'http://localhost:3000/quizzes'; // رابط السيرفر
+  private baseUrl = 'https://edu-smart-a95n7si7w-mustafa-osamas-projects.vercel.app/quizzes'; // رابط السيرفر
 
   constructor(private http: HttpClient) {}
 

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MessageService {
-  private baseUrl = 'http://localhost:3000'; // غيرها لو السيرفر على عنوان مختلف
+  private baseUrl = 'https://edu-smart-a95n7si7w-mustafa-osamas-projects.vercel.app'; // غيرها لو السيرفر على عنوان مختلف
 
   constructor(private http: HttpClient) {}
 

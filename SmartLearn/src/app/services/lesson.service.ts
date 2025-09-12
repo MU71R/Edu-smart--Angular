@@ -11,7 +11,7 @@ export class LessonService {
   private lessonsSubject = new BehaviorSubject<Lesson[]>([]);
   public lessons$ = this.lessonsSubject.asObservable();
 
-  private apiUrl = 'http://localhost:3000/lessons';
+  private apiUrl = 'https://edu-smart-a95n7si7w-mustafa-osamas-projects.vercel.app/lessons';
 
   constructor(private http: HttpClient) {}
 

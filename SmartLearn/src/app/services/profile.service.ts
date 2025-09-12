@@ -64,7 +64,7 @@ decodeToken(): any {
 }
 
 getProfile() {
-  return this.http.get<User>('http://localhost:3000/user/profile').pipe(
+  return this.http.get<User>('https://edu-smart-a95n7si7w-mustafa-osamas-projects.vercel.app/user/profile').pipe(
     tap((response: any) => {
       console.log('✅ Profile data:', response);
       // ممكن تخزني البيانات في BehaviorSubject عشان تبقي متاحة لكل الصفحات
@@ -76,7 +76,7 @@ getProfile() {
 
 updateProfile(user: Partial<User>) {
   return this.http.put<{ message: string; user: User }>(
-    'http://localhost:3000/user/update',
+    'https://edu-smart-a95n7si7w-mustafa-osamas-projects.vercel.app/user/update',
     user
   ).pipe(
     tap((response) => {
@@ -87,7 +87,7 @@ updateProfile(user: Partial<User>) {
   );
 }
 changePassword(currentPassword: string, newPassword: string) {
-  return this.http.put<any>('http://localhost:3000/user/changePassword', {
+  return this.http.put<any>('https://edu-smart-a95n7si7w-mustafa-osamas-projects.vercel.app/user/changePassword', {
     currentPassword,
     newPassword
   }).pipe(

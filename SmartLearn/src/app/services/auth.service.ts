@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   private readonly userKey = 'userData';
   private readonly tokenKey = 'token';
-  private apiUrl = 'http://localhost:3000/user';
+  private apiUrl = 'https://edu-smart-a95n7si7w-mustafa-osamas-projects.vercel.app/user';
   private userBehaviorSubject = new BehaviorSubject<User | null>(
     this.getUserFromLocalStorage()
   );
