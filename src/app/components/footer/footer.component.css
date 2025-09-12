@@ -1,6 +1,28 @@
-footer a {
-  transition: color 0.2s ease-in-out;
+.btn-gradient {
+  background: linear-gradient(90deg, #0d6efd, #6610f2);
+  color: #fff;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-footer a:hover {
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Social Icons Hover */
+.social-icon {
+  font-size: 1.2rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.social-icon:hover {
+  color: #0d6efd;
+  transform: scale(1.2);
+}
+
+/* Footer links hover */
+.footer-link {
+  transition: color 0.3s ease;
+}
+.footer-link:hover {
   color: #0d6efd;
 }

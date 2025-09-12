@@ -52,7 +52,6 @@ import { CoursesManagementComponent } from './components/courses-management/cour
 import { ProfileComponent } from './components/profile/profile.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { CreateLessonComponent } from './components/create-lesson/create-lesson.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,7 +97,15 @@ import { CreateLessonComponent } from './components/create-lesson/create-lesson.
     CreateLessonComponent
 
   ],
-  imports: [AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule, BrowserModule, FontAwesomeModule, CommonModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FontAwesomeModule,
+    CommonModule
+  ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor , multi: true }],
   bootstrap: [AppComponent]
 })

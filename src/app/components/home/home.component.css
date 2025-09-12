@@ -1,84 +1,88 @@
-  .card {
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    border: none !important;
-    height: 1rem;
-    width: 20rem;
-  }
+/* Hero Section adjustments */
+.hero-buttons button {
+  transition: transform 0.2s ease;
+}
+.hero-buttons button:hover {
+  transform: translateY(-3px);
+}
 
-  .card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-  }
-  
-  .card-text{
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
-    overflow: hidden;
-    width: 100%;
-    height: 50px;
-  }
- 
-  .card img {
-    height: 200px;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
+/* Slider */
+.slider-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding: 1rem 0;
+  -webkit-overflow-scrolling: touch;
+}
+.slider-container::-webkit-scrollbar {
+  display: none;
+}
 
-  .card:hover img {
-    transform: scale(1.08);
-  }
+.slider-card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 220px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.slider-card:hover {
+  transform: translateY(-5px);
+}
+.slider-card img {
+  width: 100%;
+  border-radius: 6px;
+  height: 120px;
+  object-fit: cover;
+}
 
-  .card-body {
-    padding: 1rem 1.2rem;
-  }
 
-  .card-body h6 {
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
-  }
 
-  .card-body p {
-    margin-bottom: 0.3rem;
-  }
-  .icon{
-    font-size: 2rem;
-    color:#4f46e5;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-  }
-  .text-muted{
-    font-size: 0.9rem;
-    font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  .card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: none;
-    background: transparent;
-    font-size: 0.95rem;
-  }
 
-  .card-footer .fw-bold {
-    font-size: 1.1rem;
-  }
 
-  .badge {
-    font-size: 0.75rem;
-    padding: 0.4em 0.7em;
-    border-radius: 30px;
-  }
-  .container-Hero{
-    background-color: #f8f9fa;
-  }
-  .card {
-    border-radius: 15px;
-    transition: transform 0.2s ease-in-out;
-  }
-  .card:hover {
-    transform: translateY(-5px);
-  }
+
+
+
+
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.course-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.course-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.course-card h6 {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.course-card p {
+  font-size: 0.875rem;
+  margin: 0.25rem 0;
+}
+
