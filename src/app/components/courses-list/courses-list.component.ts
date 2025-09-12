@@ -16,10 +16,13 @@ export class CoursesListComponent implements OnInit {
   filters = {
     categoryId: 'all',
     maxPrice: 0,
-
+    searchText: '',
     language: '',    // ضفناها
     free: false
   };
+
+  showFilters: boolean = false;
+
 
   Categories = Categories; // Make Categories enum available in template
 
@@ -27,11 +30,27 @@ export class CoursesListComponent implements OnInit {
     private coursesService: CoursesService,
     private router: Router
   ) { }
-
+  isMobile = window.innerWidth < 768; // أقل من md
   ngOnInit(): void {
+    this.checkDevice();
+    window.addEventListener('resize', () => this.checkDevice());
     this.coursesService.getCourses().subscribe(data => {
       this.courses = data;
     });
+  }
+
+  checkDevice() {
+    this.isMobile = window.innerWidth < 768;
+  }
+  
+  resetFilters() {
+    this.filters = {
+      categoryId: 'all',
+      maxPrice: 0,
+      searchText: '',
+      language: '',
+      free: false
+    };
   }
 
   setCategory(categoryId: string) {

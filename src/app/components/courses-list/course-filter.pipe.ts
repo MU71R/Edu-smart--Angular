@@ -10,8 +10,6 @@ export class CourseFilterPipe implements PipeTransform {
     if (!courses) return [];
 
     let filtered = [...courses];
-console.log('mom');
-
     // فلترة بالبحث (الاسم أو الديسكر)
     if (searchText && searchText.trim() !== '') {
       filtered = filtered.filter(course =>
