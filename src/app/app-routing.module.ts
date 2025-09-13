@@ -34,9 +34,7 @@ const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "home", component: HomeComponent },
   { path: "courses-list", component: CoursesListComponent },
-  { path: "course-details/:id", component: CourseDetailsComponent },
-  
-  
+  { path: "course-details/:id", component: CourseDetailsComponent },  
   // صفحات الطلاب
   {
     path: "checkout/:id",
@@ -47,8 +45,6 @@ const routes: Routes = [
   {
     path: "payment-success",
     component: PaymentSuccessComponent,
-    canActivate: [authRoleGuard],
-    data: { roles: ['student'] }
   },
   {
     path: "dashboard-student",
