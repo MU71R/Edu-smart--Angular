@@ -44,8 +44,7 @@ export class RegisterComponent {
 
   submitRegister() {
     this.isLoading = true;
-
-    // استخدام FormData للرفع مع الملف
+  
     const formDataToSend = new FormData();
     formDataToSend.append('name', this.formData.name);
     formDataToSend.append('email', this.formData.email);
@@ -56,18 +55,19 @@ export class RegisterComponent {
     if (this.selectedFile && this.formData.role === 'instructor') {
       formDataToSend.append('certificate', this.selectedFile);
     }
-
+  
     this.authService.register(formDataToSend).subscribe({
       next: (res: any) => {
         this.isLoading = false;
-
+  
         Swal.fire({
           icon: 'success',
           title: 'Register successful!',
           timer: 2000,
           showConfirmButton: false,
         });
-
+  
+        // ✅ خليك واثق إن user + token اتحفظوا في AuthService
         const user = res.user;
         if (user.role === 'admin') {
           this.router.navigate(['/dashboard']);
@@ -90,7 +90,7 @@ export class RegisterComponent {
         });
       }
     });
-  }
+  }  
 
   openRoleModal() {
     this.showRoleModal = true;

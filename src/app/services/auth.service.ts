@@ -74,24 +74,29 @@ export class AuthService {
   }
 
   // ✅ Register
-  register(user: FormData) {
-    return this.http.post<User>(`${this.apiUrl}/register`, {
-      name: user.get('name')!,
-      email: user.get('email')!,
-      password: user.get('password')!,
-      phonenumber: user.get('phonenumber')!,
-      city: user.get('city')!,
-      role: user.get('role')!,
-      certificateURL: user.get('certificateURL'),
-    }).pipe(
-      tap((response: any) => {
-        console.log('✅ Register success:', response);
-        this.userBehaviorSubject.next(response);
-        localStorage.setItem(this.userKey, JSON.stringify(response));
-        this.loggedIn.next(true); // 🔹 بمجرد التسجيل يبقى Logged in
-      })
-    );
-  }
+ // ✅ Register
+register(userData: FormData) {
+  return this.http.post<any>(`${this.apiUrl}/register`, userData).pipe(
+    tap((response: any) => {
+      console.log('✅ Register success:', response);
+
+      const userData = response.user;
+      const token = response.token;
+
+      // حفظ اليوزر والتوكن
+      this.userBehaviorSubject.next(userData);
+      localStorage.setItem(this.userKey, JSON.stringify(userData));
+      localStorage.setItem(this.tokenKey, token);
+
+      this.loggedIn.next(true); // 🔹 بمجرد التسجيل يبقى Logged in
+    }),
+    catchError((err) => {
+      console.error('❌ Error in register API:', err);
+      return throwError(() => err);
+    })
+  );
+}
+
 
   // ✅ Login
 // AuthService
