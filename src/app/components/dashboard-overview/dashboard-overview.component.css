@@ -57,4 +57,24 @@
     align-items: center;
     justify-content: center;
   }
-  
+  /* ----------- */
+  /* Dropdown notifications */
+.notifications-dropdown {
+  position: absolute;
+  right: 0;
+  top: 2.5rem;
+  width: 280px;
+  background: #fff;
+  max-height: 350px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+/* Stat cards hover effect */
+.stat-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
