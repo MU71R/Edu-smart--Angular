@@ -101,7 +101,7 @@ const routes: Routes = [
   {
     path: "instructor-detail/:id",
     component: DashboardInstructorDetailComponent,
-    canActivate: [authLoginGuard],
+    canActivate: [authRoleGuard],
     data: { roles: ['admin'] }
   },
   {
