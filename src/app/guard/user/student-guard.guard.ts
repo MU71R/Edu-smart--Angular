@@ -12,22 +12,10 @@ export const authLoginGuard: CanActivateFn = (route, state) => {
     const role = user.role?.toLowerCase();
 
     // وجّه المستخدم حسب دوره
-    if (role === 'admin') {
-      router.navigate(['/dashboard']);
-    } 
-    else if (role === 'student') {
-      router.navigate(['/dashboard-student']);
-    } 
-    else if (role === 'instructor') {
-      if (user.isApproved === true) {
-        router.navigate(['/instructor-dashboard']);
-      } else {
-        router.navigate(['/unauthorized']);
-      }
-    } 
-    else {
-      router.navigate(['/unauthorized']);
-    }
+    if (role === 'admin') router.navigate(['/dashboard']);
+    else if (role === 'student') router.navigate(['/dashboard-student']);
+    else if (role === 'instructor') router.navigate(['/instructor-dashboard']);
+    else router.navigate(['/unauthorized']);
 
     return false; 
   }
@@ -48,12 +36,6 @@ export const authRoleGuard: CanActivateFn = (route: ActivatedRouteSnapshot, stat
   const user = JSON.parse(userData);
   const role = user.role?.toLowerCase();
   const allowedRoles: string[] = (route.data['roles'] || []).map((r: string) => r.toLowerCase());
-
-  // شرط خاص بالإنستركتور
-  if (role === 'instructor' && user.isApproved !== true) {
-    router.navigate(['/unauthorized']);
-    return false;
-  }
 
   if (!allowedRoles.includes(role)) {
     router.navigate(['/unauthorized']);
