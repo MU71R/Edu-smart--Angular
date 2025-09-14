@@ -56,7 +56,7 @@ const routes: Routes = [
     path: "courses-management",
     component: CoursesManagementComponent,
     canActivate: [authRoleGuard],
-    data: { roles: ['student'] }
+    data: { roles: ['admin'] }
   },
 
   // صفحات المدرسين
