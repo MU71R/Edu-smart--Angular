@@ -139,6 +139,10 @@ login(credentials: { email: string; password: string }) {
     localStorage.removeItem(this.tokenKey);
   }
 
+  isInstructorApproved(): boolean {
+    const user = this.getUserFromLocalStorage();
+    return !!(user && user.role?.toLowerCase() === 'instructor' && user.isApproved === true);
+  }  
   isAdmin(): boolean {
     const user = this.userBehaviorSubject.value;
     return user?.role === 'admin';
